@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-// Superclass
 class Person {
 
     String name;
@@ -17,7 +16,6 @@ class Person {
     }
 }
 
-// Subclass
 class Student extends Person {
 
     int rollNo;
@@ -49,19 +47,13 @@ public class SingleInheritance {
 
         System.out.print("Enter Roll Number: ");
         int roll = sc.nextInt();
-
-        // Calling superclass method
         s.getPersonDetails(name, age);
 
-        // Calling subclass method
         s.getStudentDetails(roll);
 
         System.out.println("\n===== STUDENT DETAILS =====");
-
-        // Superclass method
         s.displayPersonDetails();
 
-        // Subclass method
         s.displayStudentDetails();
 
         sc.close();
