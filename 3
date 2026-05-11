@@ -9,75 +9,75 @@ class Book {
 
     static int totalBooks = 0;
 
-    Book(int id, String name, String authorName) {
+    Book(int id, String name, String auth) {
         bookId = id;
         bookName = name;
-        author = authorName;
+        author = auth;
         issued = false;
 
         totalBooks++;
     }
 
-    void displayBook() {
-
-        System.out.println("Book ID : " + bookId);
-        System.out.println("Book Name : " + bookName);
-        System.out.println("Author : " + author);
-
-        if(issued) {
-            System.out.println("Status : Issued");
-        } else {
-            System.out.println("Status : Available");
-        }
-
-        System.out.println("---------------------------");
-    }
 
     void issueBook() {
-
-        if(issued) {
-            System.out.println("Book already issued.");
-        } else {
+        if(!issued) {
             issued = true;
-            System.out.println("Book issued successfully.");
+            System.out.println("Book Issued Successfully.");
+        } else {
+            System.out.println("Book is already issued.");
         }
     }
 
-    void returnBook() {
 
+    void returnBook() {
         if(issued) {
             issued = false;
-            System.out.println("Book returned successfully.");
+            System.out.println("Book Returned Successfully.");
         } else {
             System.out.println("Book was not issued.");
         }
     }
 
+
+    void displayBook() {
+
+        System.out.println("\nBook ID: " + bookId);
+        System.out.println("Book Name: " + bookName);
+        System.out.println("Author: " + author);
+
+        if(issued) {
+            System.out.println("Status: Issued");
+        } else {
+            System.out.println("Status: Available");
+        }
+    }
+
+
     static void showTotalBooks() {
-        System.out.println("Total Books = " + totalBooks);
+        System.out.println("\nTotal Books Added: " + totalBooks);
     }
 }
 
-public class Library{
+public class LibraryManagement {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        Book b1 = new Book(101, "Java Programming", "James Gosling");
-        Book b2 = new Book(102, "Python Basics", "Guido Van Rossum");
-        Book b3 = new Book(103, "Data Structures", "Mark Allen");
+        Book books[] = new Book[10];
 
+        int count = 0;
         int choice;
 
         do {
 
-            System.out.println("\n===== Library Management System =====");
-            System.out.println("1. View All Books");
+            System.out.println("\n===== LIBRARY MANAGEMENT SYSTEM =====");
+            System.out.println("1. Add Book");
             System.out.println("2. Issue Book");
             System.out.println("3. Return Book");
-            System.out.println("4. Show Total Books");
-            System.out.println("5. Exit");
+            System.out.println("4. View Books");
+            System.out.println("5. Total Book Count");
+            System.out.println("6. Exit");
 
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
@@ -86,59 +86,68 @@ public class Library{
 
                 case 1:
 
-                    b1.displayBook();
-                    b2.displayBook();
-                    b3.displayBook();
+                    sc.nextLine();
 
+                    System.out.print("Enter Book ID: ");
+                    int id = sc.nextInt();
+
+                    sc.nextLine();
+
+                    System.out.print("Enter Book Name: ");
+                    String name = sc.nextLine();
+
+                    System.out.print("Enter Author Name: ");
+                    String author = sc.nextLine();
+
+                    books[count] = new Book(id, name, author);
+
+                    count++;
+
+                    System.out.println("Book Added Successfully.");
                     break;
 
                 case 2:
 
-                    System.out.print("Enter Book ID to issue: ");
+                    System.out.print("Enter Book ID to Issue: ");
                     int issueId = sc.nextInt();
 
-                    if(issueId == 101) {
-                        b1.issueBook();
-                    }
-                    else if(issueId == 102) {
-                        b2.issueBook();
-                    }
-                    else if(issueId == 103) {
-                        b3.issueBook();
-                    }
-                    else {
-                        System.out.println("Invalid Book ID");
+                    for(int i = 0; i < count; i++) {
+
+                        if(books[i].bookId == issueId) {
+                            books[i].issueBook();
+                        }
                     }
 
                     break;
 
                 case 3:
 
-                    System.out.print("Enter Book ID to return: ");
+                    System.out.print("Enter Book ID to Return: ");
                     int returnId = sc.nextInt();
 
-                    if(returnId == 101) {
-                        b1.returnBook();
+                    for(int i = 0; i < count; i++) {
+
+                        if(books[i].bookId == returnId) {
+                            books[i].returnBook();
+                        }
                     }
-                    else if(returnId == 102) {
-                        b2.returnBook();
-                    }
-                    else if(returnId == 103) {
-                        b3.returnBook();
-                    }
-                    else {
-                        System.out.println("Invalid Book ID");
-                    }
-                    
+
                     break;
 
                 case 4:
 
-                    Book.showTotalBooks();
+                    for(int i = 0; i < count; i++) {
+                        books[i].displayBook();
+                    }
 
                     break;
 
                 case 5:
+
+                    Book.showTotalBooks();
+                    break;
+
+                case 6:
 
                     System.out.println("Exiting Program...");
                     break;
@@ -148,7 +157,7 @@ public class Library{
                     System.out.println("Invalid Choice!");
             }
 
-        } while(choice != 5);
+        } while(choice != 6);
 
         sc.close();
     }
