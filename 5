@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+class Vehicle {
+
+    void start() {
+
+        System.out.println("Vehicle is starting.");
+    }
+
+    void stop() {
+
+        System.out.println("Vehicle is stopping.");
+    }
+}
+
+class Car extends Vehicle {
+
+    void drive() {
+
+        System.out.println("Car is driving.");
+    }
+}
+
+public class SingleInheritanceDemo {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Car c = new Car();
+
+        System.out.println("Superclass Methods:");
+        c.start();
+        c.stop();
+
+        System.out.println("\nSubclass Method:");
+        c.drive();
+
+        sc.close();
+    }
+}
