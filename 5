@@ -1,39 +1,68 @@
 import java.util.Scanner;
 
-class Vehicle {
+// Superclass
+class Person {
 
-    void start() {
+    String name;
+    int age;
 
-        System.out.println("Vehicle is starting.");
+    void getPersonDetails(String n, int a) {
+        name = n;
+        age = a;
     }
 
-    void stop() {
-
-        System.out.println("Vehicle is stopping.");
-    }
-}
-
-class Car extends Vehicle {
-
-    void drive() {
-
-        System.out.println("Car is driving.");
+    void displayPersonDetails() {
+        System.out.println("\nName: " + name);
+        System.out.println("Age: " + age);
     }
 }
 
-public class SingleInheritanceDemo {
+// Subclass
+class Student extends Person {
+
+    int rollNo;
+
+    void getStudentDetails(int r) {
+        rollNo = r;
+    }
+
+    void displayStudentDetails() {
+        System.out.println("Roll Number: " + rollNo);
+    }
+}
+
+public class SingleInheritance {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Car c = new Car();
 
-        System.out.println("Superclass Methods:");
-        c.start();
-        c.stop();
+        Student s = new Student();
 
-        System.out.println("\nSubclass Method:");
-        c.drive();
+        System.out.println("===== SINGLE INHERITANCE DEMO =====");
+
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Age: ");
+        int age = sc.nextInt();
+
+        System.out.print("Enter Roll Number: ");
+        int roll = sc.nextInt();
+
+        // Calling superclass method
+        s.getPersonDetails(name, age);
+
+        // Calling subclass method
+        s.getStudentDetails(roll);
+
+        System.out.println("\n===== STUDENT DETAILS =====");
+
+        // Superclass method
+        s.displayPersonDetails();
+
+        // Subclass method
+        s.displayStudentDetails();
 
         sc.close();
     }
