@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+abstract class Shape {
+    abstract void draw();
+
+    void message() {
+
+        System.out.println("Drawing Shapes");
+    }
+}
+
+class Circle extends Shape {
+
+    void draw() {
+
+        System.out.println("Circle is drawn.");
+    }
+}
+
+public class AbstractDemo {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Circle c = new Circle();
+
+        c.message();
+        c.draw();
+
+        sc.close();
+    }
+}
