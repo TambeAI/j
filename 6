@@ -1,23 +1,40 @@
 import java.util.Scanner;
 
-interface Animal {
+interface Shape {
 
-    void sound();
+    void calculateArea();
 }
 
-class Dog implements Animal {
+class Circle implements Shape {
 
-    public void sound() {
+    double radius;
 
-        System.out.println("Dog barks.");
+    Circle(double r) {
+        radius = r;
+    }
+
+    public void calculateArea() {
+
+        double area = 3.14 * radius * radius;
+
+        System.out.println("Area of Circle = " + area);
     }
 }
 
-class Cat implements Animal {
+class Rectangle implements Shape {
 
-    public void sound() {
+    double length, width;
 
-        System.out.println("Cat meows.");
+    Rectangle(double l, double w) {
+        length = l;
+        width = w;
+    }
+
+    public void calculateArea() {
+
+        double area = length * width;
+
+        System.out.println("Area of Rectangle = " + area);
     }
 }
 
@@ -27,13 +44,55 @@ public class InterfaceDemo {
 
         Scanner sc = new Scanner(System.in);
 
-        Animal a;
+        int choice;
 
-        a = new Dog();
-        a.sound();
+        do {
 
-        a = new Cat();
-        a.sound();
+            System.out.println("\n===== INTERFACE DEMO =====");
+            System.out.println("1. Circle");
+            System.out.println("2. Rectangle");
+            System.out.println("3. Exit");
+
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch(choice) {
+
+                case 1:
+
+                    System.out.print("Enter Radius: ");
+                    double radius = sc.nextDouble();
+                    Shape s1 = new Circle(radius);
+
+                    s1.calculateArea();
+
+                    break;
+
+                case 2:
+
+                    System.out.print("Enter Length: ");
+                    double length = sc.nextDouble();
+
+                    System.out.print("Enter Width: ");
+                    double width = sc.nextDouble();
+
+                    Shape s2 = new Rectangle(length, width);
+
+                    s2.calculateArea();
+
+                    break;
+
+                case 3:
+
+                    System.out.println("Exiting Program...");
+                    break;
+
+                default:
+
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while(choice != 3);
 
         sc.close();
     }
