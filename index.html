@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DSCloud Practicals</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<pre id="code">Loading practical...</pre>
+
+<script>
+    const id = window.location.pathname.split("/").pop();
+
+    fetch(`https://raw.githubusercontent.com/TambeAI/MM/main/${id}.txt`)
+        .then(response => {
+            if (!response.ok) throw new Error("Practical not found");
+            return response.text();
+        })
+        .then(code => {
+            document.getElementById("code").textContent = code;
+        })
+        .catch(() => {
+            document.getElementById("code").textContent =
+                "Practical not found";
+        });
+</script>
+</body>
+</html>
